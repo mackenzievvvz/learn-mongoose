@@ -65,7 +65,7 @@ BookInstanceSchema.statics.getBookInstanceCount = async function (filter?: Filte
 
 BookInstanceSchema.statics.getBookDetails = async function (id: string, selectOptions?: string): Promise<IBookInstance[]> {
   const listBookInstances: IBookInstance[] = await BookInstance
-    .find({ book: { $id: id } })
+    .find({ book: id })
     .select(selectOptions? selectOptions : 'imprint status').exec();
 
   return listBookInstances;
