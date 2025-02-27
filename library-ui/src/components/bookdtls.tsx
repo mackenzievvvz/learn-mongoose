@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 interface BookDetailProps {
   book: string;
   handleContent: (type: string, id?: string) => void;

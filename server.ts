@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import homeRouter from './pages/home';
 import availableRouter from './pages/books_status';
 import bookRouter from './pages/books';
+import bookdtlsRouter from './pages/books copy';
 import authorRouter from './pages/authors';
 import createBookRouter from './pages/create_book';
 
@@ -41,6 +42,8 @@ app.use('/home', homeRouter);
 app.use('/available', availableRouter);
 
 app.use('/books', bookRouter);
+
+app.use('/book_dtls', bookdtlsRouter);
 
 app.use('/authors', authorRouter);
 

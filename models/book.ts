@@ -1,6 +1,7 @@
 import mongoose, { Schema, Document, Model, FilterQuery } from 'mongoose';
 import Author, { IAuthor } from './author';
 import Genre, { IGenre } from './genre';
+import { IBookInstance } from './bookinstance';
 
 /**
  * A type that represents a book document in the books collection.
@@ -36,6 +37,7 @@ export interface IBook extends Document {
 interface IBookModel extends Model<IBook> {
   getAllBooksWithAuthors(projectionOpts: string, sortOpts?: { [key: string]: 1 | -1 }): Promise<IBook[]>;
   getBookCount(fitler?: FilterQuery<IBook>): Promise<number>;
+  getBook(id:string): Promise<IBook>;
 }
 
 /**
@@ -72,6 +74,10 @@ BookSchema.statics.getAllBooksWithAuthors = async function (projection: string, 
     .populate('author');
   }
   return Book.find({}, projection).populate('author');
+}
+
+BookSchema.statics.getBook = async function (id: string): Promise<IBook> {
+  return this.findById(id).populate('author').populate('genre').exec();
 }
 
 /**
